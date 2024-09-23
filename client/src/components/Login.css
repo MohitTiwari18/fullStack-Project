@@ -1,0 +1,60 @@
+/* Set the entire background to purple */
+.body {
+    background-color: rgb(236, 179, 248);
+    height: 100vh; /* Make it cover the full viewport height */
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+  }
+  
+  /* Style for the form container */
+  .outermost {
+    background-color: white; /* Set a background color for the form */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 300px;
+    
+  }
+  
+  /* Input fields styling */
+  .outermost input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Label styling */
+  .outermost label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Style for the login button */
+  .outermost button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(84, 41, 228); /* Set violet color for the button */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for the button */
+  .outermost button:hover {
+    background-color: #c71585; /* Slightly darker shade of violet on hover */
+  }
+  
+  /* Error message styling */
+  .outermost p {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  

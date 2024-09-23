@@ -1,0 +1,240 @@
+/* Styling for the leads table */
+.all-leads {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Icons next to phone and email */
+.icon-container {
+    margin-left: 8px;
+}
+
+/* Individual styles for each icon */
+.icon-phone {
+    color: #1e90ff; /* Blue for phone */
+    margin-left: 5px;
+    cursor: pointer;
+}
+  
+.icon-message {
+    color: #ff4500; /* Orange for message */
+    margin-left: 5px;
+    cursor: pointer;
+}
+  
+.icon-whatsapp {
+    color: #25d366; /* Green for WhatsApp */
+    margin-left: 5px;
+    cursor: pointer;
+}
+  
+.icon-email {
+    color: #d44638; /* Red for email */
+    margin-left: 5px;
+    cursor: pointer;
+}
+  
+.icon:hover {
+    opacity: 0.7;
+}
+
+/* Favorite icon styling */
+.icon-favorite {
+    color: #ccc; /* Default grey for non-favorite */
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.icon-favorite.favorite {
+    color: #e74c3c; /* Red for favorite */
+}
+
+/* Tabs section styling */
+.tab-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 20px;
+}
+  
+.tabs-left {
+    display: flex;
+}
+  
+.tab-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+  
+.tab-button.active {
+    background-color: #0056b3;
+}
+  
+.tab-button:hover {
+    background-color: #0056b3;
+}
+  
+.total-leads {
+    font-size: 18px;
+    font-weight: bold;
+    align-self: center;
+}
+
+/* Header section styling */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.left-section {
+    display: flex;
+}
+
+.right-section {
+    display: flex;
+    align-items: center;
+}
+
+.add-lead-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: background-color 0.3s;
+}
+
+.add-lead-btn:hover {
+    background-color: #218838;
+}
+
+.search-bar {
+    padding: 10px;
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+/* Action icons for Edit and Delete */
+.icon-action {
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #333;
+}
+
+.edit-icon:hover {
+    color: #007bff; /* Blue for edit */
+}
+
+.delete-icon:hover {
+    color: #dc3545; /* Red for delete */
+}
+
+/* Additional CSS for the table, etc. (unchanged from the original) */
+/* Additional CSS for pagination and rows per page */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 2px solid #dee2e6;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+}
+
+.pagination-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.rows-per-page {
+    display: flex;
+    align-items: center;
+}
+
+.rows-per-page label {
+    margin-right: 10px;
+}
+
+.rows-per-page select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+/* Sorting section */
+
+  /* Sorting dropdown styling */
+.sort-dropdown {
+    padding: 10px;
+    margin-left: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 16px;
+}
+
+/* Add a hover effect to make it interactive */
+.sort-dropdown:hover {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Style for the dropdown when it is focused */
+.sort-dropdown:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Ensuring that the dropdown is properly aligned with other elements */
+.header-section .left-section {
+    display: flex;
+    align-items: center;
+}
