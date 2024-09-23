@@ -238,3 +238,54 @@ input[type="checkbox"] {
     display: flex;
     align-items: center;
 }
+.table-responsive {
+    overflow-x: auto; /* Enables horizontal scroll for small screens */
+  }
+  
+  .table {
+    width: 100%; /* Ensures the table takes full width */
+    margin-bottom: 1rem; /* Space below the table */
+  }
+  
+  .icon-container {
+    display: flex;
+    gap: 5px; /* Space between icons */
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: space-between; /* Space between controls */
+    align-items: center; /* Center vertically */
+    margin-top: 1rem; /* Space above pagination */
+  }
+  
+  .rows-per-page {
+    display: flex;
+    align-items: center; /* Align items vertically */
+  }
+  
+  .rows-per-page label {
+    margin-right: 5px; /* Space between label and select */
+  }
+  
+  .header-section {
+    display: flex;
+    justify-content: space-between; /* Space between sections */
+    margin: 1rem 0; /* Space above and below header */
+  }
+  
+  @media (max-width: 768px) {
+    .header-section {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+    }
+  
+    .tabs-left {
+      display: flex;
+      flex-direction: column; /* Stack tabs vertically on smaller screens */
+    }
+  
+    .tab-button {
+      margin-bottom: 5px; /* Space between tab buttons */
+    }
+  }
+  

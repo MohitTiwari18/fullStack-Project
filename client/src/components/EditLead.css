@@ -1,0 +1,58 @@
+.edit-lead-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000; /* Ensure it appears above other elements */
+    width: 400px;
+  }
+  
+  .edit-lead-modal h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .edit-lead-modal form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .edit-lead-modal label {
+    margin-bottom: 10px;
+  }
+  
+  .edit-lead-modal input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .edit-lead-modal button {
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .edit-lead-modal button[type="submit"] {
+    background-color: #28a745; /* Green for save button */
+    color: white;
+  }
+  
+  .edit-lead-modal button[type="button"] {
+    background-color: #dc3545; /* Red for cancel button */
+    color: white;
+  }
+  
+  .edit-lead-modal button:hover {
+    opacity: 0.9;
+  }
+  
