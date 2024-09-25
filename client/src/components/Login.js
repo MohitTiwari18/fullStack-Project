@@ -20,6 +20,7 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        //jwt token
         if (data.token) {
           navigate("/home"); // Redirect to Home.js on successful login
         } else {

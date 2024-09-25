@@ -16,18 +16,18 @@ import EditLead from "./EditLead"; // Import the EditLead component
 import AddLead from "./AddLead"; // Import the AddLead component
 
 const Home = () => {
-  const [leads, setLeads] = useState([]); // State to store all leads
-  const [favorites, setFavorites] = useState([]); // State to store favorite leads
-  const [untouched, setUntouched] = useState([]); // State for untouched leads
-  const [currentPage, setCurrentPage] = useState(1); // State for pagination
-  const [rowsPerPage, setRowsPerPage] = useState(10); // State for number of rows per page
-  const [sortOption, setSortOption] = useState("normal"); // State for sorting options
-  const [searchTerm, setSearchTerm] = useState(""); // State for search term
-  const [activeTab, setActiveTab] = useState("all"); // State for active tab
-  const [editingLead, setEditingLead] = useState(null); // State for editing lead
-  const [addingLead, setAddingLead] = useState(false); // State for adding lead
+  const [leads, setLeads] = useState([]); // State to store all leads (1. GET all lead)
+  const [addingLead, setAddingLead] = useState(false); // State for adding lead (2. ADD lead)
+  const [editingLead, setEditingLead] = useState(null); // State for editing lead (3. EDIT [PUT] lead)
+  const [sortOption, setSortOption] = useState("normal"); // State for sorting options (4. SORT lead)
+  const [searchTerm, setSearchTerm] = useState(""); // State for search term (5. SEARCH lead)
+  const [currentPage, setCurrentPage] = useState(1); // State for pagination (6. PAGINATION lead)
+  const [rowsPerPage, setRowsPerPage] = useState(10); // State for number of rows per page (7. PAGINATIN lead)
+  const [activeTab, setActiveTab] = useState("all"); // State for active tab (8. ACTIVE lead)
+  const [favorites, setFavorites] = useState([]); // State to store favorite leads (9. FAVORITE lead)
+  const [untouched, setUntouched] = useState([]); // State for untouched leads (10. UNTOUCHED lead)
 
-  // Fetch leads from API on component mount
+  // 1. Fetch leads from API on component mount /////////////// GET ALL LEADS ///////////////////////////
   useEffect(() => {
     fetch("http://localhost:5000/api/leads")
       .then((response) => response.json())
@@ -35,7 +35,37 @@ const Home = () => {
       .catch((error) => console.error("Error fetching leads:", error));
   }, []);
 
-  // Sort leads based on selected option
+  // 2. Function to add new lead ///////////////////////////// ADD NEW LEAD /////////////////////////////
+  const handleAddLeadSave = (newLead) => {
+    setLeads((prevLeads) => [...prevLeads, newLead]); // Add new lead to state
+    setAddingLead(false); // Close the add lead modal
+  };
+
+  // 3. Function to save edited lead ///////////////////////////// EDIT LEAD /////////////////////////////
+  const handleEditSave = (updatedLead) => {
+    setLeads(
+      leads.map((lead) =>
+        lead.leadID === updatedLead.leadID ? updatedLead : lead
+      )
+    );
+    setEditingLead(null); // Close the edit modal
+  };
+
+  // Function to cancel editing
+  const handleEditCancel = () => {
+    setEditingLead(null); // Close the edit modal
+  };
+
+  // 4. Function to delete a lead ///////////////////////////// DELETE LEAD /////////////////////////////
+  const deleteLead = (leadID) => {
+    setLeads(leads.filter((lead) => lead.leadID !== leadID));
+    setFavorites(favorites.filter((favLead) => favLead.leadID !== leadID));
+    setUntouched(
+      untouched.filter((untouchedLead) => untouchedLead.leadID !== leadID)
+    );
+  };
+
+  // 5. Sort leads based on selected option /////////////////////// SORTING ////////////////////////////
   const sortedLeads = [...leads].sort((a, b) => {
     if (sortOption === "a-to-z") {
       return a.name.localeCompare(b.name);
@@ -46,12 +76,22 @@ const Home = () => {
     return 0; // Normal (no sorting)
   });
 
-  // Filter leads based on search term
+  // 6. Filter leads based on search term ////////////////////// SEARCHING ///////////////////////////////
   const filteredLeads = sortedLeads.filter((lead) =>
     lead.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Function to add lead to favorites
+  // 7. Pagination logic
+  const totalPages = Math.ceil(filteredLeads.length / rowsPerPage); //////////////////////// PAGINATION ///////////////////
+  const paginatedLeads = (
+    activeTab === "favorites"
+      ? favorites
+      : activeTab === "untouched"
+      ? untouched
+      : filteredLeads
+  ).slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+
+  // 8. Function to add favorite lead to favorites ///////////////////////////// MY FAVORITE LEADS /////////////////////////////
   const addToFavorites = (lead) => {
     if (!favorites.some((favLead) => favLead.leadID === lead.leadID)) {
       setFavorites([...favorites, lead]);
@@ -61,7 +101,7 @@ const Home = () => {
     }
   };
 
-  // Function to toggle untouched leads
+  // 9. Function to toggle untouched leads ///////////////////////////// UNTOUCH LEADS /////////////////////////////
   const toggleUntouched = (lead) => {
     if (
       untouched.some((untouchedLead) => untouchedLead.leadID === lead.leadID)
@@ -77,48 +117,12 @@ const Home = () => {
       setUntouched([...untouched, lead]);
     }
   };
-  // Function to save edited lead
-  const handleEditSave = (updatedLead) => {
-    setLeads(
-      leads.map((lead) =>
-        lead.leadID === updatedLead.leadID ? updatedLead : lead
-      )
-    );
-    setEditingLead(null); // Close the edit modal
-  };
 
-  // Function to cancel editing
-  const handleEditCancel = () => {
-    setEditingLead(null); // Close the edit modal
-  };
-
-  // Function to delete a lead
-  const deleteLead = (leadID) => {
-    setLeads(leads.filter((lead) => lead.leadID !== leadID));
-    setFavorites(favorites.filter((favLead) => favLead.leadID !== leadID));
-    setUntouched(
-      untouched.filter((untouchedLead) => untouchedLead.leadID !== leadID)
-    );
-  };
-
-  // Function to save new lead
-  const handleAddLeadSave = (newLead) => {
-    setLeads((prevLeads) => [...prevLeads, newLead]); // Add new lead to state
-    setAddingLead(false); // Close the add lead modal
-  };
-
-  // Pagination logic
-  const totalPages = Math.ceil(filteredLeads.length / rowsPerPage);
-  const paginatedLeads = (
-    activeTab === "favorites"
-      ? favorites
-      : activeTab === "untouched"
-      ? untouched
-      : filteredLeads
-  ).slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
-
+  //////////////////////////////////////////// JSX //////////////////////////////////////////////////////////
   return (
     <>
+      {/******************************************** HEADER SECTION ****************************************/}
+
       <div className="tab-section">
         <div className="tabs-left">
           {/* Tab buttons for All, My Favorite, and Untouched leads */}
@@ -150,6 +154,10 @@ const Home = () => {
         </div>
       </div>
 
+      {/******************************************** BODY SECTION ****************************************/}
+
+      {/* Heading section at left side before sorting section */}
+
       <div className="header-section">
         <div className="left-section">
           <h2>
@@ -159,7 +167,9 @@ const Home = () => {
               ? "Untouched Leads"
               : "All Leads Quick View:"}
           </h2>
+
           {/* Sort dropdown */}
+
           <select
             className="sort-dropdown"
             value={sortOption}
@@ -170,11 +180,16 @@ const Home = () => {
             <option value="z-to-a">Z to A</option>
           </select>
         </div>
+
+        {/* ADD LEAD button */}
+
         <div className="right-section">
           <button className="add-lead-btn" onClick={() => setAddingLead(true)}>
             + Add Lead
-          </button>{" "}
-          {/* Add Lead button */}
+          </button>
+
+          {/* SEARCH button */}
+
           <input
             type="text"
             placeholder="Search leads..."
@@ -184,6 +199,8 @@ const Home = () => {
           />
         </div>
       </div>
+
+      {/************* TABLE TO SHOW ALL LEAD ***********/}
 
       <div className="all-leads">
         {(activeTab === "favorites"
@@ -284,6 +301,8 @@ const Home = () => {
               </table>
             </div>
 
+            {/******************************************** PAGINATION SECTION at Footer Side *******************************/}
+
             <div className="pagination-container">
               <div className="pagination-controls">
                 {/* Pagination controls */}
@@ -328,6 +347,8 @@ const Home = () => {
         )}
       </div>
 
+      {/******************************************** EDIT LEAD FORM SECTION ****************************************/}
+
       {/* Modal for editing lead */}
       {editingLead && (
         <EditLead
@@ -336,6 +357,8 @@ const Home = () => {
           onCancel={handleEditCancel}
         />
       )}
+
+      {/******************************************** ADD NEW LEAD FORM SECTION ***************************************/}
 
       {/* Modal for adding new lead */}
       {addingLead && (
